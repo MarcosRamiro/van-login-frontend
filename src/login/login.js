@@ -1,13 +1,27 @@
 
 function handleToken(token) {
-    // var profile = googleUser.getBasicProfile();
-    // console.log('ID: ' + profile.getId());
-    // console.log('Name: ' + profile.getName());
-    // console.log('Image URL: ' + profile.getImageUrl());
-    // console.log('Email: ' + profile.getEmail());
-  
-    // var id_token = googleUser.getAuthResponse().id_token;
-    // Envie o id_token para seu servidor para validação
 
     console.log(token);
+
+    fetch('http://localhost:8081/api/auth/exchange-token', {
+      method: 'POST', // Define o método HTTP como POST
+      headers: {
+          'Content-Type': 'application/json' // Define o tipo de conteúdo como JSON
+          // Outros cabeçalhos podem ser adicionados aqui, se necessário
+      },
+      body: JSON.stringify({ token: token})
+    })
+    .then(response => {
+      if (!response.ok) {
+          throw new Error('Erro na requisição: ' + response.status);
+      }
+      return response.json(); // Converte a resposta para JSON
+    })
+    .then(data => {
+        console.log('Resposta do servidor:', data); // Manipula os dados recebidos
+    })
+    .catch(error => {
+        console.error('Ocorreu um erro:', error); // Trata erros
+    });
+
   }
