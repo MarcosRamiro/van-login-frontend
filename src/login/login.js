@@ -22,37 +22,52 @@ loginButton.addEventListener('click', () => {
     auth.signInWithRedirect(provider);
 });
 
-// Você precisará adicionar um observador para lidar com o retorno do redirecionamento
-auth.onAuthStateChanged((user) => {
-    if (user) {
-        // O usuário está logado, você pode obter o token e enviar para o seu servidor
-        user.getIdToken().then(token => {
-            fetch('http://localhost:8081/api/auth/exchange-token', {
+// Captura o resultado do redirecionamento
+auth.getRedirectResult()
+    .then(result => {
+        if (result.user) {
+            console.log("Login bem-sucedido via redirecionamento!");
+            const user = result.user;
+
+            // Obtém o token do usuário
+            return user.getIdToken();
+        } 
+        throw new Error("Não foi possível autenticar: {result.user is false}");
+    })
+    .then((token) => {
+        if (token) {
+            // Envia o token para o servidor
+            return fetch('http://localhost:8081/api/auth/exchange-token', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ token: token })
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`Erro na requisição: ${response.status} ${response.statusText}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log(JSON.stringify(data));
-                    localStorage.setItem('token', data.token);
-                    window.location.href = '/selecaovan/';
-                })
-                .catch(error => {
-                    console.error('Erro ao trocar token:', error);
-                });
-        }).catch(error => {
-            console.error('Erro ao obter token:', error);
-        });
+            });
+        }
+
+        throw new Error("Não foi possível autenticar: {token is false}");
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Erro na requisição: ${response.status} ${response.statusText}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log("Token recebido do servidor:", data);
+        localStorage.setItem('token', data.token); // Armazena o token no localStorage
+        window.location.href = '/selecaovan/'; // Redireciona para a página desejada
+    })
+    .catch(error => {
+        console.error('Erro ao processar o redirecionamento:', error);
+    });
+
+// Observador de estado de autenticação
+auth.onAuthStateChanged(user => {
+    if (user) {
+        console.log("Usuário logado:", user.email);
     } else {
-        // O usuário não está logado
-        console.error('Não foi possível fazer a autenticação!');
+        console.log("Nenhum usuário logado.");
     }
 });
