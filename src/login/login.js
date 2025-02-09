@@ -43,7 +43,7 @@ auth.onAuthStateChanged((user) => {
                 .then(data => {
                     console.log(JSON.stringify(data));
                     localStorage.setItem('token', data.token);
-                    window.location.href = '/selecaovan/selecaovan.html';
+                    window.location.href = '/selecaovan/';
                 })
                 .catch(error => {
                     console.error('Erro ao trocar token:', error);
@@ -53,5 +53,6 @@ auth.onAuthStateChanged((user) => {
         });
     } else {
         // O usuário não está logado
+        console.error('Não foi possível fazer a autenticação!');
     }
 });
