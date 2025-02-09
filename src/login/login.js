@@ -1,12 +1,12 @@
  // Inicialize o Firebase
  const firebaseConfig = {
     // Cole as informações de configuração do seu projeto Firebase aqui
-    apiKey: "AIzaSyCx0lNu-Z9Q7KEkLtYOk7v4pLnTTdlS6wM",
-    authDomain: "van-ceic.firebaseapp.com",
-    projectId: "van-ceic",
-    storageBucket: "van-ceic.firebasestorage.app",
-    messagingSenderId: "239110003764",
-    appId: "1:239110003764:web:5668e5871612b338873e61"
+    apiKey: "AIzaSyCx0lNu-Z9Q7KEkLtYOk7v4pLnTTdlS6wM", // FIREBASE_APIKEY=AIzaSyCx0lNu-Z9Q7KEkLtYOk7v4pLnTTdlS6wM
+    authDomain: "van-ceic.firebaseapp.com", // FIREBASE_AUTH_DOMAIN=van-ceic.firebaseapp.com
+    projectId: "van-ceic", // FIREBASE_PROJECT_ID=van-ceic
+    storageBucket: "van-ceic.firebasestorage.app", // FIREBASE_STORAGE_BUCKET=van-ceic.firebasestorage.app
+    messagingSenderId: "239110003764", // FIREBASE_MESSAGING_SENDER_ID=239110003764
+    appId: "1:239110003764:web:5668e5871612b338873e61" //FIREBASE_APP_ID=1:239110003764:web:5668e5871612b338873e61
 };
 
 firebase.initializeApp(firebaseConfig);
