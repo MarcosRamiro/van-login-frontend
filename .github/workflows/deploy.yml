@@ -33,3 +33,4 @@ jobs:
               whoami
               ls -la  ${{ vars.PATH_TO_DEPLOY }}
               echo $RSYNC_STDOUT
+
