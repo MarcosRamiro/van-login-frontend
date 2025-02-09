@@ -45,9 +45,9 @@ jobs:
             TARGET: ${{ vars.PATH_TO_DEPLOY_INFRA }}
             SCRIPT_BEFORE: |
               whoami
-              ls -la  ${{ vars.PATH_TO_DEPLOY }}
+              ls -la  ${{ vars.PATH_TO_DEPLOY_INFRA }}
             SCRIPT_AFTER: |
               whoami
-              ls -la  ${{ vars.PATH_TO_DEPLOY }}
+              ls -la  ${{ vars.PATH_TO_DEPLOY_INFRA }}
               echo $RSYNC_STDOUT
 
