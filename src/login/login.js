@@ -25,6 +25,7 @@ loginButton.addEventListener('click', () => {
 // Captura o resultado do redirecionamento
 auth.getRedirectResult()
     .then(result => {
+        console.log("Resultado do redirecionamento:", result);
         if (result.user) {
             console.log("Login bem-sucedido via redirecionamento!");
             const user = result.user;
@@ -32,7 +33,7 @@ auth.getRedirectResult()
             // Obtém o token do usuário
             return user.getIdToken();
         } 
-        throw new Error("Não foi possível autenticar: {result.user is false}");
+        throw new Error("Não foi possível autenticar: result.user é falso ou nulo.");
     })
     .then((token) => {
         if (token) {
