@@ -3,13 +3,13 @@ function handleToken(token) {
 
     console.log(token);
 
-    fetch('http://localhost:8081/api/auth/exchange-token', {
+    fetch('/api/auth/exchange-token', {
       method: 'POST', // Define o método HTTP como POST
       headers: {
           'Content-Type': 'application/json' // Define o tipo de conteúdo como JSON
           // Outros cabeçalhos podem ser adicionados aqui, se necessário
       },
-      body: JSON.stringify({ token: token})
+      body: JSON.stringify({ token: token.credential })
     })
     .then(response => {
       if (!response.ok) {
