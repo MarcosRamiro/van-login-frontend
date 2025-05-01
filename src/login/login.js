@@ -19,6 +19,13 @@ function handleToken(token) {
     })
     .then(data => {
         console.log('Resposta do servidor:', data); // Manipula os dados recebidos
+        if (data.token) {
+            // Redireciona para a página inicial ou outra página após o login bem-sucedido
+            window.location.href = '/selecaovan/index.html';
+        } else {
+            // Exibe uma mensagem de erro se o login falhar
+            alert('Erro ao fazer login!');
+        }
     })
     .catch(error => {
         console.error('Ocorreu um erro:', error); // Trata erros
