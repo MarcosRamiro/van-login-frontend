@@ -20,7 +20,8 @@ function handleToken(token) {
     .then(data => {
         console.log('Resposta do servidor:', data); // Manipula os dados recebidos
         if (data.token) {
-            // Redireciona para a página inicial ou outra página após o login bem-sucedido
+            // Armazena o token e redireciona para a página de seleção de van
+            localStorage.setItem('token', data.token);
             window.location.href = '/selecaovan/index.html';
         } else {
             // Exibe uma mensagem de erro se o login falhar
